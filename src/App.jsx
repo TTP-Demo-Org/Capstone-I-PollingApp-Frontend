@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router"
 import Home from "./pages/Home"
 import './App.css'
 import PollDetail from "./pages/PollDetail"
+import CreatePoll from "./pages/CreatePoll"
+
 
 
 // const items = [
@@ -19,6 +21,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/poll/:id" element={<PollDetail />} />
+            <Route path="/create" element={<CreatePoll />} />
         </Routes>    
     </>
   )
