@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router"
 import Home from "./pages/Home"
-import './App.css'
 import PollDetail from "./pages/PollDetail"
+import Layout from "./components/Layout"
+import './App.css'
 
 
 // const items = [
@@ -16,10 +17,12 @@ function App() {
     
   return (
     <>
+      <Layout>
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/poll/:id" element={<PollDetail />} />
         </Routes>    
+      </Layout>
     </>
   )
 }

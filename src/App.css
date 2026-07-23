@@ -1,0 +1,66 @@
+.navbar {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 72px);
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.home-header h1 {
+  margin: 0;
+  font-size: 40px;
+  color: #e5e7eb;
+}
+
+.new-poll-button {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  background-color: #5146e5;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.new-poll-button:hover {
+  background-color: #4338ca;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  color: #9ca3af;
+  border-top: 1px solid #2d2d2d;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
