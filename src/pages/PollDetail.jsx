@@ -1,78 +1,135 @@
-import { useState, useEffect } from "react"
-import { useParams, useNavigate} from "react-router"
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
 
 function PollDetail() {
-    const { id } = useParams()
-    const navigate = useNavigate()
-    const [poll, setPoll] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [selectedOption, setSelectedOption] = useState(null)
-    const [email, setEmail] = useState("")
-    const [error, setError] = useState(null)
+    const navigate = useNavigate();
+  const { id } = useParams();
+  const [poll, setPoll] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+  const [emailError, setEmailError] = useState("");
 
-    useEffect(() => {
-        const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`
+  const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org|edu|gov|io|co)$/i;
 
-        async function loadPoll() {
-            const res = await fetch(url)
-            const data = await res.json()
-            setPoll(data)
-            setLoading(false)
-        }
+  useEffect(() => {
+    const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`;
 
-        loadPoll()
-    }, [id])
-
-    async function handleSubmit() {
-        const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}/vote`
-
-        try {
-            const res = await fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ optionId: selectedOption, email: email })
-            })
-            if (!res.ok) throw new Error("Failed to submit vote")
-            navigate(`/poll/${id}/results`)
-        } catch (err) {
-            setError(err.message)
-        }
+    async function loadPoll() {
+      const res = await fetch(url);
+      const data = await res.json();
+      setPoll(data);
+      setLoading(false);
     }
 
-    if (loading) return <p>Loading...</p>
+    loadPoll();
+  }, [id]);
 
-    return (
-        <div>
-            <button onClick={() => navigate("/")}> Back</button>
-            <h1>{poll.title}</h1>
-            <p>{poll.description}</p>
+  async function handleSubmit() {
+    const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}/vote`;
 
-            {poll.Options.map((option) => (
-                <label key={option.id}>
-                    <input
-                        type="radio"
-                        name="pollOption"
-                        value={option.id}
-                        checked={selectedOption === option.id}
-                        onChange={() => setSelectedOption(option.id)}
-                    />
-                    {option.text}
-                </label>
-            ))}
+    if (!email) {
+      setEmailError("Please enter your email.");
+      return;
+    }
 
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
+    if (!emailPattern.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
 
-            <button disabled={!selectedOption || !email } onClick={handleSubmit}>
-                Submit Vote!
-            </button>
-            {error && <p>{error}</p>}
-            
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ optionId: selectedOption, email: email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit vote!")
+      }
+
+      navigate(`/poll/${id}/results`);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div className="poll-page">
+      <button
+        className="back-button"
+        onClick={() => navigate("/")}
+      >
+        ← Back to polls
+      </button>
+
+      <section className="poll-card">
+        <h1>{poll.title}</h1>
+        <p className="poll-description">{poll.description}</p>
+
+        <div className="options-list">
+          {poll.Options.map((option) => (
+            <label
+              key={option.id}
+              className={
+                selectedOption === option.id
+                  ? "option-row selected"
+                  : "option-row"
+              }
+            >
+              <input
+                type="radio"
+                name="pollOption"
+                value={option.id}
+                checked={selectedOption === option.id}
+                onChange={() => setSelectedOption(option.id)}
+              />
+
+              <span>{option.text}</span>
+            </label>
+          ))}
         </div>
-    )
+
+        <label className="email-label">
+          Email address
+          <input
+            className="email-input"
+            type="email"
+            value={email}
+            placeholder="you@example.com"
+            onChange={(e) => {
+              const newEmail = e.target.value;
+              setEmail(newEmail);
+
+              if (newEmail && !emailPattern.test(newEmail)) {
+                setEmailError("Please enter a valid email address.");
+              } else {
+                setEmailError("");
+              }
+            }}
+          />
+        </label>
+
+        {emailError && <p className="error-message">{emailError}</p>}
+
+        <button
+          className="submit-button"
+          disabled={!selectedOption}
+          onClick={handleSubmit}
+        >
+          Submit vote
+        </button>
+
+        {error && <p className="error-message">{error}</p>}
+      </section>
+    </div>
+  );
 }
 
-export default PollDetail
+export default PollDetail;

@@ -27,26 +27,35 @@ a {
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space);
-  padding: var(--space);
+  display: grid;
+  gap: 16px;
+  padding: 0;
 }
 
 .card {
-  flex: 1 1 160px;
-  max-width: 220px;
-  background: var(--card);
-  border-radius: var(--radius);
-  overflow: hidden;
+  display: block;
+  width: 100%;
+  max-width: none;
+  padding: 24px;
+  background: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: #5146e5;
+  transform: translateY(-2px);
 }
 
 .card h3 {
-  font-size: 15px;
-  padding: 8px;
+  padding: 0;
+  color: #ffffff;
+  font-size: 20px;
 }
 
 .card p {
-  color: var(--muted);
-  padding: 0 8px 8px;
+  padding: 8px 0 0;
+  color: #9ca3af;
+  font-size: 16px;
 }

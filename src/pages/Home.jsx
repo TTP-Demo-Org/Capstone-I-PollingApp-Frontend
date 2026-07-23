@@ -16,7 +16,7 @@ const navigate = useNavigate()//creates the function from the import
         async function loadPolls() {
             try{
                 const res = await fetch(url)
-                if (!res.ok) throw new Error("Failed to load polls")
+                if (!res.ok) throw new Error("Failed to load polls!")
                 const data = await res.json()
                 setPolls(data)
             }   catch (err) {
@@ -33,10 +33,13 @@ const navigate = useNavigate()//creates the function from the import
     if (error) return <p>Error: {error}</p>
   return (
     <>
-        <div>
-            <h1>Poll Up</h1>
-            <button onClick={() => navigate("/create")}>+ Create Poll</button>
-        </div> 
+<div className="home-header">
+    <h1>All polls</h1>
+
+    <button className="new-poll-button" type="button" onClick={() => navigate("/create")}>
+        + New poll
+    </button>
+</div>
 
         <div className="grid">
             {polls.map((poll) => (
