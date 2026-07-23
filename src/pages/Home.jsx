@@ -12,7 +12,7 @@ function Home() {
         async function loadPolls() {
             try{
                 const res = await fetch(url)
-                if (!res.ok) throw new Error("Failed to load polls")
+                if (!res.ok) throw new Error("Failed to load polls!")
                 const data = await res.json()
                 setPolls(data)
             }   catch (err) {
@@ -29,8 +29,12 @@ function Home() {
     if (error) return <p>Error: {error}</p>
   return (
     <>
-        <div>
-            <h1>Poll Up</h1>
+        <div className="home-header">
+            <h1>All polls</h1>
+
+            <button className="new-poll-button" type="button">
+                + New poll
+            </button>
         </div> 
 
         <div className="grid">
