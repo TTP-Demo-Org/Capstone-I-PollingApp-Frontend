@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'   /* make sure to import both */
 import PollCard from '../components/PollCard'
 
-function Home() {
+function App() {
     const [polls, setPolls] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -33,7 +33,7 @@ function Home() {
             <h1>Poll Up</h1>
         </div> 
 
-        <div className="grid">
+        <div>
             {polls.map((poll) => (
                 <PollCard key={poll.id} poll={poll} />
             ))}
@@ -42,4 +42,4 @@ function Home() {
   )
 }
 
-export default Home
+export default App
