@@ -64,3 +64,121 @@
   display: flex;
   gap: 24px;
 }
+
+.poll-page {
+    min-height: calc(100vh - 72px);
+    padding: 24px 0;
+  }
+
+  .back-button {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 24px;
+  }
+
+  .back-button:hover {
+    color: #ffffff;
+  }
+
+  .poll-card {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #1a1a1a;
+    border: 1px solid #2d2d2d;
+    border-radius: 16px;
+  }
+
+  .poll-card h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 32px;
+  }
+
+  .poll-description {
+    margin: 12px 0 28px;
+    color: #9ca3af;
+    font-size: 17px;
+  }
+
+  .options-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .option-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    color: #ffffff;
+    background: #111111;
+    border: 1px solid #2d2d2d;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .option-row:hover,
+  .option-row.selected {
+    border-color: #5146e5;
+    background: #211d4d;
+  }
+
+  .option-row input {
+    width: 18px;
+    height: 18px;
+    accent-color: #5146e5;
+  }
+
+  .email-label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .email-input {
+    padding: 14px;
+    color: #ffffff;
+    background: #111111;
+    border: 1px solid #2d2d2d;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .email-input:focus {
+    outline: 2px solid #5146e5;
+    border-color: transparent;
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px;
+    border: none;
+    border-radius: 9px;
+    color: #ffffff;
+    background: #5146e5;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .submit-button:hover:not(:disabled) {
+    background: #4338ca;
+  }
+
+  .submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .error-message {
+    margin-top: 16px;
+    color: #f87171;
+  }
