@@ -72,7 +72,6 @@ function PollDetail() {
     }
   }
 
-<<<<<<< HEAD
   function handleCopyLink() {
   navigator.clipboard.writeText(window.location.href);
   setCopied(true);
@@ -94,13 +93,6 @@ function PollDetail() {
           {copied ? "Copied!" : "Copy link"}
         </button>
       </div>
-=======
-  return (
-    <div className="poll-page">
-      <button className="back-button" onClick={() => navigate("/")}>
-        ← Back to Polls
-      </button>
->>>>>>> 07597d0b38fbe328252b809c16624661113bc582
 
       <section className="poll-card">
         <h1>{poll.title}</h1>
