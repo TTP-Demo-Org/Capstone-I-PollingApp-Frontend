@@ -32,7 +32,11 @@ function Results() {
     if (error) return <p>Error: {error}</p>
 
     const maxVotes = Math.max(...poll.Options.map(option => option.voteCount))
-    
+
+    /*const totalVotes = poll.Options.reduce((acc, currentOption) => {
+        return acc + currentOption.voteCount
+    }, 0)  --- (not used here at all, just noted here)*/
+
     return (
         <div className="poll-page">
             <button className="back-button"
@@ -45,17 +49,20 @@ function Results() {
                 <h1>{poll.title}</h1>
                 <p className="poll-description">{poll.description}</p>
 
-                <div className="vote-count">
+                <div>
                     {poll.Options.map((option, index) => (
-                        <div
-                            key={option.id}
-                            className={option.voteCount === maxVotes ? "vote-bar winner" : "vote-bar"}
-                        // style={{minWidth: `${option.voteCount * 85}px`, height:"50px" }}
-                        >
-                            <h2 className="option-text">{option.text}</h2>
+                        <div key={option.id}>
+                            <h2>{option.text}</h2>
+                            {/* <progress max={maxVotes} value={option.voteCount}>{option.voteCount}</progress> --- progess bar (not used here at all, just noted here)*/}
+                            <div
 
-                            {/* {index === 0 && <h2 className="winner-message">👑</h2>} */}
-                            <h2 className="option-vote-count">{option.voteCount}</h2>
+                                className={option.voteCount === maxVotes ? "vote-bar winner" : "vote-bar"}
+                                style={{ width: `${option.voteCount / maxVotes * 100}%` }}
+
+                            // create a div that holds the text and the bar --- this holds the bar and vote count
+                            >
+                                <h2>{option.voteCount}</h2>
+                            </div>
                         </div>
                     ))}
 
