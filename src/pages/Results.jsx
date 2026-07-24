@@ -31,6 +31,8 @@ function Results() {
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error: {error}</p>
 
+    const maxVotes = Math.max(...poll.Options.map(option => option.voteCount))
+    
     return (
         <div className="poll-page">
             <button className="back-button"
@@ -47,7 +49,7 @@ function Results() {
                     {poll.Options.map((option, index) => (
                         <div
                             key={option.id}
-                            className={index === 0 ? "vote-bar winner" : "vote-bar"}
+                            className={option.voteCount === maxVotes ? "vote-bar winner" : "vote-bar"}
                         // style={{minWidth: `${option.voteCount * 85}px`, height:"50px" }}
                         >
                             <h2 className="option-text">{option.text}</h2>
