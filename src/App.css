@@ -79,6 +79,28 @@
     margin-bottom: 24px;
   }
 
+  .poll-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.copy-link-button {
+  border: 1px solid #2d2d2d;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.copy-link-button:hover {
+  border-color: #5146e5;
+  color: #ffffff;
+}
+
   .back-button:hover {
     color: #ffffff;
   }
