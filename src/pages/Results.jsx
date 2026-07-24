@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams, useNavigate} from "react-router"
+import { useParams, useNavigate } from "react-router"
 
 function Results() {
     const navigate = useNavigate()
@@ -13,14 +13,14 @@ function Results() {
         const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`
 
         async function loadPoll() {
-            try{
+            try {
                 const res = await fetch(url)
                 if (!res.ok) throw new Error("Failed to load polls!")
                 const data = await res.json()
                 setPoll(data)
-            }   catch (err) {
+            } catch (err) {
                 setError(err.message)
-            }   finally {
+            } finally {
                 setLoading(false)
             }
         }
@@ -34,7 +34,7 @@ function Results() {
     return (
         <div className="poll-page">
             <button className="back-button"
-            onClick={() => navigate("/")}
+                onClick={() => navigate("/")}
             >
                 ← Back to Polls
             </button>
@@ -45,14 +45,14 @@ function Results() {
 
                 <div className="vote-count">
                     {poll.Options.map((option, index) => (
-                        <div 
+                        <div
                             key={option.id}
-                            className={index === 0 ?"vote-bar winner" : "vote-bar"}
-                            style={{minWidth: `${option.voteCount * 85}px`, height:"50px" }}
-                        >                            
+                            className={index === 0 ? "vote-bar winner" : "vote-bar"}
+                        // style={{minWidth: `${option.voteCount * 85}px`, height:"50px" }}
+                        >
                             <h2 className="option-text">{option.text}</h2>
-                            
-                            {index === 0 && <h2 className="winner-message">Wins!</h2>}
+
+                            {/* {index === 0 && <h2 className="winner-message">👑</h2>} */}
                             <h2 className="option-vote-count">{option.voteCount}</h2>
                         </div>
                     ))}
