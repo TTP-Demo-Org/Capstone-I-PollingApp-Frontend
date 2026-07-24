@@ -55,13 +55,13 @@ function CreatePoll() {
   return (
     <div className="poll-page">
       <button className="back-button"
-      onClick={() => navigate("/")}
+        onClick={() => navigate("/")}
       >
         ← Back to Polls
       </button>
 
-      <section className="poll-card">
-        <h1>Create a Poll</h1>
+      <section className="poll-card" style={{ paddingTop: "20px" }}>
+        <h1 style={{ paddingBottom: "20px" }}>Create a Poll</h1>
         <form className="options-list" onSubmit={handleSubmit}>
           <input
             className="option-row"

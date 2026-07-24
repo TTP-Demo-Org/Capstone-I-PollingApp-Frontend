@@ -18,23 +18,26 @@ function PollDetail() {
     const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`;
 
     async function loadPoll() {
-      try{
-          const res = await fetch(url)
-          if (!res.ok) throw new Error("Failed to load polls!")
-          const data = await res.json()
-          setPoll(data)
-      }   catch (err) {
-          setError(err.message)
-      }   finally {
-          setLoading(false)
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Failed to load polls!");
+        const data = await res.json();
+        setPoll(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     }
 
     loadPoll();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  if (loading) return <p>Loading...</p>;
+
+  if (error && !poll) {
+    return <p>Error: {error}</p>;
+  }
 
   async function handleSubmit() {
     const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}/vote`;
@@ -59,7 +62,8 @@ function PollDetail() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to submit vote!")
+        setEmailError(data.error || "Failed to submit vote!");
+        return;
       }
 
       navigate(`/poll/${id}/results`);
@@ -68,6 +72,7 @@ function PollDetail() {
     }
   }
 
+<<<<<<< HEAD
   function handleCopyLink() {
   navigator.clipboard.writeText(window.location.href);
   setCopied(true);
@@ -89,6 +94,13 @@ function PollDetail() {
           {copied ? "Copied!" : "Copy link"}
         </button>
       </div>
+=======
+  return (
+    <div className="poll-page">
+      <button className="back-button" onClick={() => navigate("/")}>
+        ← Back to Polls
+      </button>
+>>>>>>> 07597d0b38fbe328252b809c16624661113bc582
 
       <section className="poll-card">
         <h1>{poll.title}</h1>
@@ -105,7 +117,8 @@ function PollDetail() {
               }
             >
               <input
-                type="radio" className="hidden-input"
+                type="radio"
+                className="hidden-input"
                 name="pollOption"
                 value={option.id}
                 checked={selectedOption === option.id}
