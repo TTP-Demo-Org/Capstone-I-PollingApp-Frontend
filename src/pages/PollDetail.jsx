@@ -10,6 +10,7 @@ function PollDetail() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [emailError, setEmailError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org|edu|gov|io|co)$/i;
 
@@ -71,11 +72,35 @@ function PollDetail() {
     }
   }
 
+<<<<<<< HEAD
+  function handleCopyLink() {
+  navigator.clipboard.writeText(window.location.href);
+  setCopied(true);
+  setTimeout(() => setCopied(false), 3000);
+}
+
+  
+
+    return (
+    <div className="poll-page">
+      <div className="poll-top-bar">
+        <button
+          className="back-button"
+          onClick={() => navigate("/")}
+        >
+          ← Back to Polls
+        </button>
+        <button className="copy-link-button" onClick={handleCopyLink}>
+          {copied ? "Copied!" : "Copy link"}
+        </button>
+      </div>
+=======
   return (
     <div className="poll-page">
       <button className="back-button" onClick={() => navigate("/")}>
         ← Back to Polls
       </button>
+>>>>>>> 07597d0b38fbe328252b809c16624661113bc582
 
       <section className="poll-card">
         <h1>{poll.title}</h1>
