@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 
 function PollDetail() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [poll, setPoll] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,14 +17,23 @@ function PollDetail() {
     const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`;
 
     async function loadPoll() {
-      const res = await fetch(url);
-      const data = await res.json();
-      setPoll(data);
-      setLoading(false);
+      try{
+          const res = await fetch(url)
+          if (!res.ok) throw new Error("Failed to load polls!")
+          const data = await res.json()
+          setPoll(data)
+      }   catch (err) {
+          setError(err.message)
+      }   finally {
+          setLoading(false)
+      }
     }
 
     loadPoll();
   }, [id]);
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
 
   async function handleSubmit() {
     const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}/vote`;
@@ -58,7 +67,7 @@ function PollDetail() {
     }
   }
 
-  if (loading) return <p>Loading...</p>;
+  
 
   return (
     <div className="poll-page">
@@ -66,7 +75,7 @@ function PollDetail() {
         className="back-button"
         onClick={() => navigate("/")}
       >
-        ← Back to polls
+        ← Back to Polls
       </button>
 
       <section className="poll-card">
@@ -84,7 +93,7 @@ function PollDetail() {
               }
             >
               <input
-                type="radio"
+                type="radio" className="hidden-input"
                 name="pollOption"
                 value={option.id}
                 checked={selectedOption === option.id}
