@@ -84,7 +84,7 @@
   }
 
   .poll-card {
-    max-width: 700px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 32px;
     background: #1a1a1a;
@@ -215,4 +215,3 @@
     left: 50%;
     transform: translateX(-50%);
 }
-

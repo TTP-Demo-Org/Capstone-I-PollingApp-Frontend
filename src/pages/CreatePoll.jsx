@@ -53,42 +53,51 @@ function CreatePoll() {
   }
 
   return (
-    <div>
-      <button onClick={() => navigate("/")}>Back</button>
-      <h1>Create a Poll</h1>
+    <div className="poll-page">
+      <button className="back-button"
+      onClick={() => navigate("/")}
+      >
+        ← Back to Polls
+      </button>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Poll title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <textarea
-          placeholder="Description (optional)"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        {options.map((opt, index) => (
+      <section className="poll-card">
+        <h1>Create a Poll</h1>
+        <form className="options-list" onSubmit={handleSubmit}>
           <input
-            key={index}
+            className="option-row"
             type="text"
-            placeholder={`Option ${index + 1}`}
-            value={opt}
-            onChange={(e) => handleOptionChange(index, e.target.value)}
+            placeholder="Poll Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-        ))}
 
-        <button type="button" onClick={addOption}>+ Add another option</button>
+          <textarea
+            className="option-row"
+            placeholder="Description (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
-        <button type="submit" disabled={submitting}>
-          {submitting ? "Creating..." : "Create Poll"}
-        </button>
+          {options.map((opt, index) => (
+            <input
+              className="option-row"
+              key={index}
+              type="text"
+              placeholder={`Option ${index + 1}`}
+              value={opt}
+              onChange={(e) => handleOptionChange(index, e.target.value)}
+            />
+          ))}
 
-        {error && <p>{error}</p>}
-      </form>
+          <button className="option-row selected" type="button" onClick={addOption}>+ Add another option</button>
+
+          <button className="submit-button" type="submit" disabled={submitting}>
+            {submitting ? "Creating..." : "Create Poll"}
+          </button>
+
+          {error && <p>{error}</p>}
+        </form>
+      </section>
     </div>
   )
 }
