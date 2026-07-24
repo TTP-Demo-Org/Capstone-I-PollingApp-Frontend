@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router"
 import Home from "./pages/Home"
 import PollDetail from "./pages/PollDetail"
+import CreatePoll from "./pages/CreatePoll"
 import Layout from "./components/Layout"
 import './App.css'
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/poll/:id" element={<PollDetail />} />
+            <Route path="/create" element={<CreatePoll />} />
         </Routes>    
       </Layout>
     </>
