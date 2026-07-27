@@ -10,7 +10,7 @@ function Results() {
 
 
     useEffect(() => {
-        const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`
+        const url = `${import.meta.env.VITE_API_URL}/polls/${id}`
 
         async function loadPoll() {
             try {

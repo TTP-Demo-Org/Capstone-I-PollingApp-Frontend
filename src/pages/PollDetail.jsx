@@ -15,7 +15,7 @@ function PollDetail() {
   const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org|edu|gov|io|co)$/i;
 
   useEffect(() => {
-    const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}`;
+    const url = `${import.meta.env.VITE_API_URL}/polls/${id}`;
 
     async function loadPoll() {
       try {
@@ -40,7 +40,7 @@ function PollDetail() {
   }
 
   async function handleSubmit() {
-    const url = `https://capstone-i-pollingapp-backend.onrender.com/polls/${id}/vote`;
+    const url = `${import.meta.env.VITE_API_URL}/polls/${id}/vote`;
 
     if (!email) {
       setEmailError("Please enter your email.");

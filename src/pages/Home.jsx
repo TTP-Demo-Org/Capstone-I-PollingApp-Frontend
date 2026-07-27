@@ -11,7 +11,7 @@ const navigate = useNavigate()//creates the function from the import
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        const url = `https://capstone-i-pollingapp-backend.onrender.com/polls`
+        const url = `${import.meta.env.VITE_API_URL}/polls`
 
         async function loadPolls() {
             try{

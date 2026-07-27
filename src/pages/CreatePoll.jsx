@@ -34,7 +34,7 @@ function CreatePoll() {
     }
 
     setSubmitting(true)
-    const url = `https://capstone-i-pollingapp-backend.onrender.com/polls`
+    const url = `${import.meta.env.VITE_API_URL}/polls`
 
     try {
       const res = await fetch(url, {
