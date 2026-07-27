@@ -72,11 +72,31 @@ function PollDetail() {
     }
   }
 
-  function handleCopyLink() {
-  navigator.clipboard.writeText(window.location.href);
-  setCopied(true);
-  setTimeout(() => setCopied(false), 3000);
-}
+  async function handleCopyLink() {
+    const pollUrl = window.location.href;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(pollUrl);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = pollUrl;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+
+      setCopied(true);
+      setError(null);
+      setTimeout(() => setCopied(false), 3000);
+    } catch (err) {
+      setError("Could not copy link. Please copy it from the address bar.");
+    }
+  }
 
   
 
