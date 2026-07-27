@@ -5,14 +5,14 @@
   align-items: center;
   padding: 0 32px;
   background-color: #0f0f0f;
-  border-bottom: 1px solid #2d2d2d;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .navbar h1 {
   margin: 0;
   font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: #e5e7eb;
 }
 
 .page-content {
